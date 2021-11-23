@@ -1,0 +1,69 @@
+#:kivy 2.0.0
+
+
+# Main kivy file responsible to handle main screens of the application
+WindowManager:
+    WalletScreen:
+    ExchangeScreen:
+    SettingScreen:
+    OptionScreen:
+    SummaryScreen:
+    AssetScreen:
+
+# !------------------------------------------------------------------------------------------------------------------------
+
+# Bottom navigation menu button
+<NavButton@Button>:
+    background_color: (0,0,0,0)
+    background_normal: ''
+    switch_to: None  #Page to switch to when pressed
+    source: None 
+    source_pressed: None
+    on_press: child.source = self.source_pressed
+    on_release: 
+        child.source = self.source
+        app.root.current = self.switch_to
+        
+    Image:
+        id: child
+        source: self.parent.source
+        size: self.parent.size
+        pos: self.parent.pos
+
+# !------------------------------------------------------------------------------------------------------------------------
+
+# Bottom navigation bar 
+<BottomNavBar@BoxLayout>:
+    size_hint_y: .15
+
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        
+        BoxLayout:
+            size_hint: .5, .5
+            padding: 30
+            spacing: 20
+
+            canvas.before:
+                Color:  
+                    rgba: (1,1,1,.2)
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [58,]
+            
+            NavButton:
+                source: 'props/buttons/wallet.png'
+                source_pressed: 'props/buttons/wallet_pressed.png'
+                switch_to: 'wallet_screen'
+            
+            NavButton:
+                source: 'props/buttons/exchange.png'
+                source_pressed: 'props/buttons/exchange_pressed.png'
+                switch_to: 'exchange_screen'
+            
+            NavButton:
+                source: 'props/buttons/settings.png'
+                source_pressed: 'props/buttons/settings_pressed.png'
+                switch_to: 'setting_screen'

@@ -1,0 +1,154 @@
+#:kivy 2.0.0
+#: import utils kivy.utils
+
+
+# !------------------------------------------------------------------------------------------------------------------------
+# Kv resposible for OptionScreen where user can choose what assets to track in his portfolio
+# !------------------------------------------------------------------------------------------------------------------------
+
+<OptionScreen>:
+    id: option_screen
+    name: 'option_screen'
+    
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: '15dp'
+
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex('#351c30')
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+# !TopBar----------------------------------------------------------------------------------------------------------------------
+        BoxLayout:
+            size_hint_y: .1
+
+            Button:
+                size_hint_x: .2
+                background_color: (0,0,0,0)
+                bacckground_normal: ''
+                on_release: app.root.current = 'wallet_screen'
+
+                Image:
+                    size: self.parent.size
+                    pos: self.parent.pos
+                    source: 'props/buttons/arrow-left-bold.png'
+
+            BoxLayout:
+                size_hint_x: .6
+
+                Label:
+                    text: 'ASSETS'
+                    font_name: 'raleway'
+                    halign: 'center'
+
+            BoxLayout:
+                size_hint_x: .2
+# !------------------------------------------------------------------------------------------------------------------------
+        BoxLayout:
+            size_hint_y: .05
+
+            Label: 
+                size: self.parent.size
+                pos: self.parent.pos
+                text: 'Assets (7/162)'
+                font_name: 'raleway'
+
+            Image:
+                source: 'props/buttons/dots-horizontal.png'
+# !------------------------------------------------------------------------------------------------------------------------
+        Label:
+            size_hint_y: .05
+            text: 'Enable assets to add them to your portfolio.\nAssets with no balance cannot be displayed'
+            font_name: 'raleway'
+# !-----------------------------------------------------------------------------------------------------------------------
+        TextInput:
+            size_hint_y: .05
+            size_hint_x: .8
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            text: 'Search'
+            font_name: 'raleway'
+            background_color: (0,0,0,0)
+            on_focus: self.text = ''
+            foreground_color: (1,1,1,1)
+            cursor_blink: True
+            multiline: False
+            cursor_color: (1,1,1,1)
+# !-----------------------------------------------------------------------------------------------------------------------
+        RecycleView:
+            size_hint_y: .75
+
+            GridLayout:
+                size_hint_y: None
+                height: self.minimum_height
+                cols: 1
+
+                BoxLayout:
+                    id: asset_options_container
+                    size_hint_y: None
+                    height: self.minimum_height
+                    orientation: 'vertical'
+                    spacing: '10dp'
+# !-----------------------------------------------------------------------------------------------------------------------
+<AssetOption>:
+    id: ''
+    asset_name: ''
+    asset_short: ''
+    icon_source: ''
+    is_active: ''
+    size_hint: .8, None
+    pos_hint: {'center_x': .5}
+    height: '70dp'
+
+    Button:
+        background_color: (0,0,0,0)
+        background_normal: ''
+
+        canvas.before:
+            Color:
+                rgba: (1,1,1,.2)
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+                radius: [38,]
+        
+        BoxLayout:
+            size: self.parent.size
+            pos: self.parent.pos
+            
+            Image:
+                size_hint_x: .2
+                source: root.icon_source
+
+            BoxLayout:
+                size_hint_x: .6
+                orientation: 'vertical'
+
+                Label:
+                    text: root.asset_short
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'bottom'
+                    font_name: 'raleway'
+                    bold: True
+
+                Label:
+                    text: root.asset_name
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'top'
+                    font_name: 'raleway'
+
+            BoxLayout:
+                size_hint_x: .2
+
+                MDSwitch:
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    active: root.is_active
+                    on_active: app.root.current_screen.manager.get_screen('option_screen').manage_options(self, root)
+            
+        
+        
+             

@@ -1,0 +1,256 @@
+#:kivy 2.0.0
+#: import utils kivy.utils
+
+
+# !------------------------------------------------------------------------------------------------------------------------
+
+# Styles of Main Homepage
+<WalletScreen>:
+    id: wallet_screen
+    name: 'wallet_screen'
+
+    Image:
+        size: root.size
+        source: 'props/images/background.png'
+        allow_stretch: True
+        keep_ratio: False
+
+    BoxLayout:
+        orientation: 'vertical'
+
+# !------------------------------------------------------------------------------------------------------------------------
+
+        # PieChart data
+        BoxLayout:
+            id: chart_box
+            size_hint_y: .35
+            padding: '15dp'
+            orientation: 'vertical'
+
+            AKPieChart:
+                items: app.items
+                size_hint: None, None
+                size: '170dp', '170dp'
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                Button:
+                    background_color: (0,0,0,0)
+                    background_normal: ''
+                    on_release: app.root.current = 'summary_screen'
+
+            Label:
+                markup: True
+                text: 'PORTFOLIO VALUE'
+                halign: 'center'
+                valign: 'center'
+                font_name: 'raleway'
+
+                Widget:
+                    canvas.before:
+                        Color: 
+                            rgba: (1,1,1,.2)
+                        Line:
+                            points: self.parent.pos[0], self.parent.pos[1]+5, self.parent.pos[0]+self.parent.width, self.parent.pos[1]+5
+                            width: 1.2 
+
+# !------------------------------------------------------------------------------------------------------------------------
+
+        # Portfolio scroller
+        BoxLayout:
+            size_hint_y: .55
+
+            ScrollView:
+
+                RecycleView:
+
+                    GridLayout:
+                        cols: 1
+                        size_hint_y: None
+                        height: self.minimum_height
+
+                        BoxLayout:
+                            id: asset_container
+                            size_hint_y: None
+                            height: self.minimum_height
+                            orientation: 'vertical'
+                            spacing: '10dp'
+                            
+                        AddMoreButton:
+                                                       
+        BottomNavBar:
+
+# !------------------------------------------------------------------------------------------------------------------------
+
+# Main container on info on crypto.
+# Instance of BoxLayout defined in first_screen.py
+<CoinBox>:
+    id: ''
+    asset_name: ''  #Name of crypto
+    asset_short: ''  #Short abbr for crypto
+    icon_source: ''  #path to icon
+    size_hint: .8, None
+    height: '75dp'
+    pos_hint: {'center_x': .5, 'center_y': .5}
+
+    Button:
+        background_color: (0,0,0,0)
+        background_normal: ''
+        on_release: app.root.current = 'asset_screen'
+
+        canvas.before:
+            Color:  
+                rgba: (1,1,1,.2)
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+                radius: [38,]
+        
+        BoxLayout:
+            size: self.parent.size
+            pos: self.parent.pos
+            orientation: 'vertical'
+
+            # Upper half of coinbox
+            BoxLayout:
+                size_hint_y: .65
+                padding: (0,'5dp','15dp',0)
+
+                Image:
+                    size_hint_x: .2
+                    source: root.icon_source
+                
+                BoxLayout:
+                    size_hint_x: .8
+                    orientation: 'vertical'
+
+                    BoxLayout:
+                        size_hint_y: .4
+
+                        Label:
+                            text: root.asset_short
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'top'
+                            bold: True
+                            font_name: 'raleway'
+                            bold: True
+                        
+                        Label:
+                            id: amount_held
+                            text: '999'
+                            text_size: self.size
+                            halign: 'right'
+                            valign: 'top'
+                            font_name: 'raleway'
+                            bold: True
+                            italic: True
+                    
+                    BoxLayout:
+                        size_hint_y: .4
+                    
+                        Label:
+                            text: root.asset_name
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'center'
+                            font_name: 'raleway'
+
+                        Label:
+                            id: value_held
+                            text: '999$'
+                            text_size: self.size
+                            halign: 'right'
+                            valign: 'top'
+                            font_name: 'raleway'
+                            italic: True
+
+                    BoxLayout:
+                        size_hint_y: .2
+
+                        Widget:
+                            canvas.before:
+                                Color: 
+                                    rgba: (1,1,1,.2)
+                                Line:
+                                    points: self.parent.pos[0], self.parent.pos[1]+2, self.parent.pos[0]+self.parent.width, self.parent.pos[1]+2
+                                    width: 1.2 
+                
+            # Lower half of CoinBox
+            BoxLayout:
+                size_hint_y: .35
+                padding: (0,0,'15dp','5dp')
+
+                BoxLayout:
+                    size_hint_x: .2
+
+                BoxLayout:
+                    size_hint_x: .8
+
+                    Label:
+                        id: current_price
+                        text: '999'
+                        text_size: self.size
+                        halign: 'left'
+                        valign: 'center'
+                        font_name: 'raleway'
+                        italic: True
+
+                    Label:
+                        id: asset_change
+                        text: '+99.9%'
+                        text_size: self.size
+                        halign: 'right'
+                        valign: 'center'
+                        font_name: 'raleway'
+                        italic: True
+                        bold: True
+                        color: utils.get_color_from_hex('#07e642')
+
+# !------------------------------------------------------------------------------------------------------------------------
+
+# Add more button:
+
+<AddMoreButton@AnchorLayout>:
+    anchor_x: 'center'
+    size_hint: .8, None
+    height: '70dp'
+    padding: (0,'10dp',0,0)
+
+    Button:
+        size_hint_x: .8
+        background_color: (0,0,0,0)
+        background_normal: ''
+        text: 'Add More'
+        font_name: 'raleway'
+        bold: True
+        on_press: 
+            bg_more.canvas.before.get_group('main')[0].rgba = (1,1,1,.5)
+        on_release:
+            bg_more.canvas.before.get_group('main')[0].rgba = (1,1,1,.2)
+            app.root.current = 'option_screen'
+            
+        Widget:
+            id: bg_more
+            pos: self.parent.pos
+            size: self.parent.size
+
+            canvas.before:
+                Color:
+                    group: 'main'
+                    rgba: (1,1,1,.2)
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [38,]
+                Color: 
+                    rgba: (1,1,1,.5)
+                Line:
+                    rounded_rectangle: (self.pos[0],self.pos[1],self.size[0],self.size[1],36)
+                    width: 1.2
+           
+        
+
+
+
+
+    

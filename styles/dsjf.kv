@@ -1,0 +1,142 @@
+# Screen:
+    
+#     # MDRaisedButton:
+#     #     text: "1"
+#     #     pos_hint: {'center_x': .5, 'center_y': .5}
+#     #     md_bg_color: app.theme_cls.primary_light
+
+#     # MDRaisedButton:
+#     #     text: "1"
+#     #     pos_hint: {'center_x': .5, 'center_y': .8}
+
+#     # MDRaisedButton:
+#     #     text: "2" 
+#     #     pos_hint: {'center_x': .5, 'center_y': .2}
+#     #     md_bg_color: app.theme_cls.primary_dark
+
+#     # MDRectangleFlatButton:
+#     #     text: "4"
+#     #     pos_hint: {'center_x': .2, 'center_y': .5}
+
+#     # MDCard:
+#     #     size_hint: None, None
+#     #     size: 400, 400
+#     #     pos_hint: {'center_x': .5, 'center_y': .5}
+#     #     elevation: 10
+#     #     padding: 25
+#     #     spacing: 25
+#     #     orientation: 'vertical'
+
+#     #     MDLabel:
+#     #         text: 'hello'
+#     #         size_hint: .5, .5
+#     #         pos_hint: {'center_x': .5, 'center_y': .2}
+#     #         height: self.texture_size[1]
+#     #         halign: 'center'
+#     #         valign: 'center'
+
+#     #     MDTextFieldRound:
+#     #         id: text_field
+#     #         hint_text: 'enter some text'
+#     #         icon_right: 'account'
+#     #         size_hint_x: None
+#     #         width: 300
+#     #         pos_hint: {'center_x': .5}
+
+#     #     MDRoundFlatButton:
+#     #         text: 'Submit'
+#     #         pos_hint: {'center_x': .5}
+#     #         on_press: app.submit()
+
+#     # MDBoxLayout:
+#     #     orientation: 'vertical'
+
+#     #     MDToolbar:
+#     #         title: 'TopBar'
+#     #         left_action_items: [['menu', lambda : app.]]
+#     #         right_action_items: [['dots-vertical']]
+
+#     #     MDLabel:
+#     #         id: label
+#     #         text: 'text'
+#     #         halign: 'center'
+#     #         valign: 'center' 
+        
+#     #     MDBottomAppBar:
+#     #         MDToolbar:
+#     #             icon: 'git'
+#     #             type: 'bottom'
+#     #             mode: 'end' #end, free-end, center
+
+#     # BoxLayout:
+#     #     orientation: 'vertical'
+
+#     #     MDToolbar:
+#     #         title: 'Bottom navbar'
+
+#     #     MDBottomNavigation:
+
+#     #         MDBottomNavigationItem:
+#     #             name: 'screen_1'
+#     #             text: 'python'
+#     #             icon: 'instagram'
+
+#     #             MDLabel:
+#     #                 text: 'python'
+#     #                 halign: 'center'
+
+#     #         MDBottomNavigationItem:
+#     #             name: 'screen_2'
+#     #             text: 'python'
+#     #             icon: 'whatsapp'
+
+#     #             MDLabel:
+#     #                 text: 'python'
+#     #                 halign: 'center'
+            
+#     #         MDBottomNavigationItem:
+#     #             name: 'screen_3'
+#     #             text: 'python'
+#     #             icon: 'git'
+
+#     #             MDLabel:
+#     #                 text: 'python'
+#     #                 halign: 'center'
+
+
+#     # MDBoxLayout:
+#     #     orientation: 'vertical'
+
+#     #     MDLabel:
+#     #         id: my_label
+#     #         text: 'text'
+#     #         halign: 'center'
+
+#     #     MDFloatingActionButtonSpeedDial:
+#     #         data: app.data
+#     #         root_buttom_anim: True
+#     #         label_text_color: 1,1,0,1
+#     #         bg_color_stack_button: 1,0,0,1
+#     #         bg_color_root_button: 1,0,0,1
+#     #         color_icon_root_icon: 1,1,0,1 
+#     #         color_icon_stack_button: 1,1,0,1 #Icon color 
+#     #         bg_hint_color: 1,1,0,1
+#     #         callback: app.func
+#             # on_open, on_close
+
+#     BoxLayout:
+#         orientation: 'vertical'
+#         size: self.parent.size
+#         pos: self.parent.pos
+
+#         MDScreen:
+#             MDRectangleFlatButton:
+#                 text: 'text'
+#                 pos_hint: {'center_x': .5, 'center_y': .5}
+#                 on_release: app.show_alert()
+
+#             MDLabel:
+#                 text: 'text_2'
+#                 pos_hint: {'center_x': .5, 'center_y': .4}
+#                 halign: 'center'
+#                 valign: 'center'

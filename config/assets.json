@@ -1,0 +1,31 @@
+{
+    "assets": {
+        "1": {
+            "name": "Bitcoin",
+            "short": "BTC"
+        },
+        "2": {
+            "name": "Ethereum",
+            "short": "ETH"
+        },
+        "3": {
+            "name": "Cardano",
+            "short": "ADA"
+        },
+        "4": {
+            "name": "Polkadot",
+            "short": "DOT"
+        },
+        "5": {
+            "name": "Dogecoin",
+            "short": "DOGE"
+        }
+    },
+    "assets_ids": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+    ]
+}
